@@ -1,4 +1,4 @@
-package pageObjects;
+package page_objects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class MainPage { //Главная страница сайта
 
-    private static final String PAGE_URL = "https://qa-scooter.praktikum-services.ru/";
+    protected static final String PAGE_URL = "https://qa-scooter.praktikum-services.ru/";
     private static final By BUTTON_TO_ORDER_IN_HEAD = By.xpath(".//button[text()='Заказать']");
     private static final By BUTTON_TO_ORDER_IN_PAGE = By.xpath(".//button[text()='Заказать' and @class='Button_Button__ra12g Button_Middle__1CSJM']");
     private static final By QUESTIONS = By.xpath(".//div[text()='Вопросы о важном']");

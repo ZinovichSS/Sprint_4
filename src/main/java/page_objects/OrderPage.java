@@ -1,10 +1,6 @@
-package pageObjects;
+package page_objects;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
-
-import java.util.List;
 
 public class OrderPage { //Страница оформления нового заказа
     private static final By NAME_INPUT_FIELD = By.xpath(".//input[@placeholder='* Имя']");
@@ -48,14 +44,6 @@ public class OrderPage { //Страница оформления нового з
     public void chooseMetroStation(String station) {
         driver.findElement(METRO_STATION_SELECT).click();
         driver.findElement(By.xpath(".//div[@class='select-search__select']//*[text()='"+station+"']")).click();
-    }
-
-    public static void wait(int seconds) {
-        try {
-            Thread.sleep(seconds * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
 }

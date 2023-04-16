@@ -1,11 +1,11 @@
-package pageObjects;
+package page_objects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class AboutRentPage { //Страница "О заказе"
+import static page_objects.MainPage.PAGE_URL;
 
-    private static final String PAGE_URL = "https://qa-scooter.praktikum-services.ru/";
+public class AboutRentPage { //Страница "О заказе"
 
     private static final By DATA_DATA_PICKER = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
     private static final By RENTAL_DAY_SELECT = By.xpath(".//div[@class='Dropdown-placeholder']");

@@ -9,16 +9,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import pageObjects.MainPage;
+import page_objects.BaseTest;
+import page_objects.MainPage;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
 @RunWith(Parameterized.class)
-public class CheckTheTextOfQuestionsAboutImportantTestParameterized {
+public class CheckTheTextOfQuestionsAboutImportantTestParameterized extends BaseTest {
 
-    private WebDriver driver;
     private final String index;
     private final String answer;
 
@@ -41,25 +41,6 @@ public class CheckTheTextOfQuestionsAboutImportantTestParameterized {
         };
     }
 
-    @Before
-    public void setUp() {
-        Properties prop = new Properties();
-        try {
-            prop.load(new FileReader("application.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String webDriver = prop.getProperty("webdriver");
-        if (webDriver.equals("firefox")) {
-            FirefoxOptions options = new FirefoxOptions();
-            WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver(options);
-        } else if (webDriver.equals("chrome")) {
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-        }
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-    }
 
     @Test
     public void checkAnswersOnQuestions() {
@@ -67,12 +48,6 @@ public class CheckTheTextOfQuestionsAboutImportantTestParameterized {
         mainPage.open();
         mainPage.scrollToTheSectionQuestionsAboutImportant();
         mainPage.checkAnswerToQuestion(index, answer);
-    }
-
-
-    @After
-    public void tearDown() {
-        driver.quit();
     }
 
 }

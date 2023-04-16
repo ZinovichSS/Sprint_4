@@ -6,22 +6,23 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import pageObjects.AboutRentPage;
-import pageObjects.ApprovalOrderPage;
-import pageObjects.MainPage;
-import pageObjects.OrderPage;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import page_objects.*;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 
 @RunWith(Parameterized.class)
-public class OrderTestParametrized {
+public class OrderTestParametrized extends BaseTest {
 
-    private WebDriver driver;
+//    private WebDriver driver;
     private final String name;
     private final String lastname;
     private final String address;
@@ -50,28 +51,9 @@ public class OrderTestParametrized {
         };
     }
 
-    @Before
-    public void setUp() {
-        Properties prop = new Properties();
-        try {
-            prop.load(new FileReader("application.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String webDriver = prop.getProperty("webdriver");
-        if (webDriver.equals("firefox")) {
-            FirefoxOptions options = new FirefoxOptions();
-            WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver(options);
-        } else if (webDriver.equals("chrome")) {
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-        }
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-    }
 
     @Test
-    public void checkCreateNewOrder_withButtonTop_checkWindowAboutASuccessfulOrder() { //Позитивный кейс по формированию заказа по кнопке "Заказать" в шапке сайта
+    public void checkCreateNewOrderWithButtonTopCheckWindowAboutASuccessfulOrder() { //Позитивный кейс по формированию заказа по кнопке "Заказать" в шапке сайта
 
         MainPage mainPage = new MainPage(driver);
         OrderPage orderPage = new OrderPage(driver);
@@ -85,23 +67,18 @@ public class OrderTestParametrized {
         orderPage.setAddress(address);
         orderPage.setNumberPhone(numberPhone);
         orderPage.chooseMetroStation(station);
-        OrderPage.wait(1);
         orderPage.clickNextButton();
-        OrderPage.wait(3);
         aboutRentPage.setData(data);
         aboutRentPage.chooseRentalDay(day);
         aboutRentPage.chooseColourBlack();
         aboutRentPage.setComment(comment);
-        OrderPage.wait(5);
         aboutRentPage.clickMakeOrderButton();
-        OrderPage.wait(2);
         approvalOrderPage.clickApproveButton();
-        OrderPage.wait(2);
         approvalOrderPage.checkIfOrderComplete();
     }
 
     @Test
-    public void checkCreateNewOrder_withButtonSecondary_checkWindowAboutASuccessfulOrder() { //Позитивный кейс по формированию заказа по кнопке "Заказать" на странице
+    public void checkCreateNewOrderWithButtonSecondaryCheckWindowAboutASuccessfulOrder() { //Позитивный кейс по формированию заказа по кнопке "Заказать" на странице
 
         MainPage mainPage = new MainPage(driver);
         OrderPage orderPage = new OrderPage(driver);
@@ -116,23 +93,15 @@ public class OrderTestParametrized {
         orderPage.setAddress(address);
         orderPage.setNumberPhone(numberPhone);
         orderPage.chooseMetroStation(station);
-        OrderPage.wait(1);
         orderPage.clickNextButton();
-        OrderPage.wait(3);
         aboutRentPage.setData(data);
         aboutRentPage.chooseRentalDay(day);
         aboutRentPage.chooseColourGrey();
         aboutRentPage.setComment(comment);
         aboutRentPage.clickMakeOrderButton();
-        OrderPage.wait(2);
         approvalOrderPage.clickApproveButton();
-        OrderPage.wait(2);
         approvalOrderPage.checkIfOrderComplete();
 
     }
 
-    @After
-    public void tearDown() {
-        driver.quit();
-    }
 }
