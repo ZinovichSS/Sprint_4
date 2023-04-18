@@ -1,28 +1,13 @@
-import org.junit.runners.Parameterized.Parameters;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.junit.runners.Parameterized.Parameters;
+import org.openqa.selenium.Keys;
 import page_objects.*;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.Duration;
-import java.util.Properties;
 
 @RunWith(Parameterized.class)
 public class OrderTestParametrized extends BaseTest {
 
-//    private WebDriver driver;
     private final String name;
     private final String lastname;
     private final String address;
@@ -44,8 +29,8 @@ public class OrderTestParametrized extends BaseTest {
     }
 
     @Parameters
-    public static String[][] getData () {
-        return new String[][] {
+    public static String[][] getData() {
+        return new String[][]{
                 {"Петр", "Петров", "Невский проспект 10", "+79111111111", "Комментарий 1", "Сокольники", "01.04.2023\n", "сутки"},
                 {"Иван", "Иванов", "Ленина 67", "89117409387", "Комментарий 2", "Лубянка", "05.05.2023\n", "двое суток"}
         };

@@ -1,8 +1,8 @@
 package page_objects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class MainPage { //Главная страница сайта
@@ -14,6 +14,7 @@ public class MainPage { //Главная страница сайта
 
 
     private final WebDriver driver;
+
     public MainPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -32,22 +33,22 @@ public class MainPage { //Главная страница сайта
 
     public void scrollToTheSectionQuestionsAboutImportant() {
         WebElement element = driver.findElement(QUESTIONS);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     public void scrollToTheButtonToOrderInPage() {
         WebElement element = driver.findElement(BUTTON_TO_ORDER_IN_PAGE);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     public void checkAnswerToQuestion(String index, String expectedAnswer) {
-        By question = By.xpath(".//div[@id='accordion__heading-" + index +"']"); //внесла переменные в метод, не знаю верно или нет, но по-другому не получилось
+        By question = By.xpath(".//div[@id='accordion__heading-" + index + "']"); //внесла переменные в метод, не знаю верно или нет, но по-другому не получилось
         By answer = By.xpath(".//div[@id='accordion__panel-" + index + "']/p");
         driver.findElement(question).click();
         String actualAnswer = driver.findElement(answer).getText();
         if (!expectedAnswer.equals(actualAnswer)) {
             try {
-                throw new Exception(String.format("Текст ответа не совпадает с ожидаемым:\nОжидаем: %s\nАктуальное: %s",expectedAnswer,actualAnswer));
+                throw new Exception(String.format("Текст ответа не совпадает с ожидаемым:\nОжидаем: %s\nАктуальное: %s", expectedAnswer, actualAnswer));
             } catch (Exception e) {
                 e.printStackTrace();
             }

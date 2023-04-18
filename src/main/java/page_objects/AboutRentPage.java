@@ -1,6 +1,7 @@
 package page_objects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import static page_objects.MainPage.PAGE_URL;
@@ -13,18 +14,19 @@ public class AboutRentPage { //Страница "О заказе"
     private static final By COLOUR_CHECKBOX_GREY = By.xpath(".//input[@id='grey']");
     private static final By BUTTON_MAKE_ORDER = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
     private static final By COMMENT_INPUT_FIELD = By.xpath(".//input[@placeholder='Комментарий для курьера']");
-
     private final WebDriver driver;
+
     public AboutRentPage(WebDriver driver) {
         this.driver = driver;
     }
+
     public void open() {
         driver.get(PAGE_URL);
     }
 
     public void chooseRentalDay(String day) {
         driver.findElement(RENTAL_DAY_SELECT).click();
-        driver.findElement(By.xpath(".//div[@class='Dropdown-menu']//*[text()='"+day+"']")).click();
+        driver.findElement(By.xpath(".//div[@class='Dropdown-menu']//*[text()='" + day + "']")).click();
     }
 
     public void clickMakeOrderButton() {
@@ -44,7 +46,7 @@ public class AboutRentPage { //Страница "О заказе"
     }
 
     public void setData(String data) {
-        driver.findElement(DATA_DATA_PICKER).sendKeys(data);
+        driver.findElement(DATA_DATA_PICKER).sendKeys(data, Keys.ENTER);
     }
 
 }
